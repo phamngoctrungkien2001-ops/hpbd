@@ -221,7 +221,7 @@ const LOCAL_ASSETS = [
     // 'assets/videos/21.mp4'
 ];
 
-const WISH_MESSAGE = "Sinh nhật hạnh phúc nha! ✨";
+const WISH_MESSAGE = "Sinh nhật hạnh phúc nha hihi! ✨";
 
 const POLAROID_CAPTIONS = [
     "😊", "❤️", "✨", "🌸", "🌻", 
