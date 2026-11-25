@@ -225,10 +225,10 @@ const WISH_MESSAGE = "Chúc em tuổi mới có tất cả! ❤️";
 
 const POLAROID_CAPTIONS = [
     "Luôn hạnh phúc ❤️", "Luôn rạng rỡ ✨", "Luôn tươi tắn🌸",
-    "Luôn tự tin🥰", "Luôn iu anh 💖", "🎂", "Luôn mạnh mẽ 🎉", "🎈",
-    "😘", "🧸", "Luôn xinh đẹp🎀", "Nhiều yêu thương💕", "🥳", 
-    "Mãi yêuu💝", "⭐", "🌷", "Nhiều may mắn🍀",
-
+    "Luôn tự tin🥰", "Luôn iu anh 💖", "Luôn mạnh mẽ 🎉",
+    "Luôn xinh đẹp🎀", "Nhiều yêu thương💕", 
+    "Mãi yêuu💝",  "Nhiều may mắn🍀",
+    // "🎈","😘", "🧸","⭐","🌷","🥳", "🎂",
 ];
 
 // ==========================================
