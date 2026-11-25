@@ -186,8 +186,8 @@ const LOCAL_ASSETS = [
     'assets/images/6.webp',
     'assets/images/7.webp',
     'assets/images/8.webp',
-    'assets/images/9.webp',
-    'assets/images/10.webp',
+    // 'assets/images/9.webp',
+    // 'assets/images/10.webp',
     // 'assets/images/11.webp',
     // 'assets/images/12.webp',
     // 'assets/images/13.webp',
@@ -221,7 +221,7 @@ const LOCAL_ASSETS = [
     // 'assets/videos/21.mp4'
 ];
 
-const WISH_MESSAGE = "Sinh nhật hạnh phúc nha hihi! ✨";
+const WISH_MESSAGE = "Sinh nhật hạnh phúc nha! ✨";
 
 const POLAROID_CAPTIONS = [
     "😊", "❤️", "✨", "🌸", "🌻", 
