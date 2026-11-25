@@ -178,7 +178,7 @@ if (isUnsafeInAppBrowser()) {
 // Data & Config
 // ==========================================
 const LOCAL_ASSETS = [
-    // 'assets/images/1.webp',
+    'assets/images/1.webp',
     // 'assets/images/2.webp',
     // 'assets/images/3.webp',
     // 'assets/images/4.webp',
