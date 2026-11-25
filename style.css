@@ -1,0 +1,1105 @@
+/* ==========================================
+   Premium UI/UX Core Styles
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Hỗ trợ trình duyệt di động tốt hơn */
+    max-height: 100dvh;
+    overflow: hidden; /* Fix triệt để lỗi scroll bar */
+    font-family: 'Quicksand', sans-serif;
+    background-color: #0b0c10;
+    color: white;
+}
+
+.scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.scene.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+body.focus-mode #scene-2 > *:not(#polaroid-container) {
+    filter: blur(8px) brightness(0.6);
+}
+
+body.focus-mode #polaroid-container .polaroid:not(:hover):not(.active) {
+    filter: blur(4px) brightness(0.7);
+}
+
+#scene-2 > * {
+    transition: filter 0.5s ease;
+}
+
+
+/* ==========================================
+   Màn 1: Parallax Night Sky
+   ========================================== */
+.stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.stars-1 {
+    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><circle cx="20" cy="20" r="1" fill="white" opacity="0.8"/><circle cx="150" cy="80" r="1" fill="white" opacity="0.5"/><circle cx="250" cy="200" r="1.5" fill="white" opacity="0.9"/></svg>') repeat;
+    animation: moveUp 100s linear infinite;
+}
+.stars-2 {
+    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400"><circle cx="80" cy="120" r="2" fill="white" opacity="0.6"/><circle cx="300" cy="250" r="1.5" fill="white" opacity="0.8"/></svg>') repeat;
+    animation: moveUp 150s linear infinite;
+}
+.stars-3 {
+    background: transparent url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500"><circle cx="180" cy="50" r="3" fill="white" opacity="0.4"/><circle cx="400" cy="350" r="2" fill="white" opacity="0.7"/></svg>') repeat;
+    animation: twinkle 4s infinite alternate;
+}
+
+@keyframes moveUp {
+    from { background-position: 0 0; }
+    to { background-position: 0 -1000px; }
+}
+@keyframes twinkle {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* 3D Gift Box */
+.gift-container {
+    position: relative;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    z-index: 10;
+}
+
+.gift-box {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    cursor: pointer;
+    animation: float 4s ease-in-out infinite;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gift-box:hover {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.gift-box:hover .glow-effect {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.glow-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,215,0,0.6) 0%, rgba(255,107,107,0) 70%);
+    z-index: 0;
+    opacity: 0.5;
+    transition: all 0.5s ease;
+}
+
+.hologram-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.6) 25%, transparent 30%);
+    background-size: 200% 200%;
+    background-position: -100% -100%;
+    border-radius: 8px;
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+.gift-body {
+    position: absolute;
+    bottom: 0;
+    width: 160px;
+    height: 120px;
+    background: linear-gradient(135deg, #ff4d4d 0%, #cc0000 100%);
+    border-radius: 8px;
+    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2), 0 20px 30px rgba(0,0,0,0.5);
+}
+
+.gift-body::after {
+    content: '';
+    position: absolute;
+    left: 65px;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.gift-lid {
+    position: absolute;
+    top: 5px;
+    left: -10px;
+    width: 180px;
+    height: 45px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #e60000 100%);
+    border-radius: 8px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.4);
+    z-index: 2;
+    transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.6s ease 0.3s;
+}
+
+.gift-lid::after {
+    content: '';
+    position: absolute;
+    left: 75px;
+    width: 30px;
+    height: 100%;
+    background: linear-gradient(90deg, #ffd700 0%, #ffb300 100%);
+}
+
+.bow {
+    position: absolute;
+    top: -35px;
+    left: 40px;
+    width: 100px;
+    height: 40px;
+}
+
+.bow::before, .bow::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 40px;
+    background: radial-gradient(ellipse at center, #ffd700 0%, #e6a800 100%);
+    border-radius: 50% 50% 0 0;
+    box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2);
+}
+
+.bow::after {
+    left: 50px;
+    transform: scaleX(-1);
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Glassmorphism Button */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    font-family: 'Quicksand', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    transition: all 0.5s ease;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(255, 107, 107, 0.4), 0 0 20px rgba(255,255,255,0.2);
+}
+
+.glass-btn:hover::before {
+    left: 200%;
+}
+
+.pulse-btn {
+    animation: gentlePulse 2s infinite;
+}
+
+@keyframes gentlePulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 8px 32px rgba(255,215,0,0.4); border-color: rgba(255,215,0,0.5); }
+}
+
+/* ==========================================
+   Màn 2: Mesh Gradient & Premium UI
+   ========================================== */
+.mesh-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffdde1; /* Đổi sang màu hồng pastel nhẹ nhàng rực rỡ */
+    overflow: hidden;
+    z-index: 1;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: floatBlob 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+.blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,117,140,1) 0%, rgba(255,117,140,0) 70%);
+    top: -100px;
+    left: -100px;
+}
+.blob-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(117,121,255,1) 0%, rgba(117,121,255,0) 70%);
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -5s;
+}
+.blob-3 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255,126,179,1) 0%, rgba(255,126,179,0) 70%);
+    top: 30%;
+    left: 20%;
+    animation-duration: 25s;
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(100px, 50px) scale(1.1); }
+    100% { transform: translate(-50px, 150px) scale(0.9); }
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: space-evenly;
+    padding: 20px;
+    pointer-events: none; /* Cho phép click xuyên qua vùng trống */
+}
+
+/* Wish Glass Panel */
+.wish-glass-panel {
+    background: rgba(255, 255, 255, 0.15); /* Làm sáng lớp kính vì nền đã sáng hơn */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 800px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    pointer-events: auto;
+    /* V5: Animation mượt mà lướt xuống và lơ lửng */
+    animation: glideInDown 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000),
+               floatGlass 6s ease-in-out infinite 1.5s;
+    transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1), padding 1.5s, background 1.5s, box-shadow 1.5s;
+}
+
+@keyframes glideInDown {
+    0% { opacity: 0; transform: translateY(-80px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatGlass {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+.wish-glass-panel.minimized {
+    animation: none; /* V5 Fix: Dừng float */
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(0.7);
+    transform-origin: center top;
+    margin: 0;
+    padding: 20px 40px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    z-index: 999; /* Luôn nằm trên cùng, không bị ảnh che lấp */
+}
+
+#wish-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    line-height: 1.6;
+    color: #ff2a55;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 42, 85, 0.4);
+    display: inline;
+}
+
+.char-reveal {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(20px);
+    animation: revealChar 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+}
+
+@keyframes revealChar {
+    to { opacity: 1; filter: blur(0); transform: translateY(0); }
+}
+
+#cursor {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2.5rem;
+    color: #ff4d6d;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.action-buttons .glass-btn {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Fix visibility of buttons in Scene 2 (light background) */
+#scene-2 .glass-btn {
+    color: #ff2a55; /* Chữ màu đỏ hồng đậm để nổi bật */
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 42, 85, 0.3);
+    font-weight: 700;
+    text-shadow: none; /* Bỏ text-shadow nếu có để chữ sắc nét hơn */
+}
+
+#scene-2 .glass-btn:hover {
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 10px 30px rgba(255, 42, 85, 0.25);
+}
+
+.hidden {
+    display: none !important;
+    margin-top: 0 !important;
+}
+
+/* Cake 3D */
+.cake-container {
+    position: relative;
+    animation: bounceInUp 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Fix Overflow Scroll: Shrink and Fade instead of just moving down */
+.cake-container.slide-down {
+    transform: translateY(20vh) scale(0.1);
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes bounceInUp {
+    0% { opacity: 0; transform: translateY(500px); }
+    60% { opacity: 1; transform: translateY(-30px); }
+    80% { transform: translateY(10px); }
+    100% { transform: translateY(0); }
+}
+
+.cake-shadow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 30px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%);
+}
+
+.cake-shadow.flicker {
+    animation: shadowFlicker 0.6s infinite alternate;
+}
+
+@keyframes shadowFlicker {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+    100% { transform: translateX(-50%) scale(1.05); opacity: 0.4; }
+}
+
+.cake {
+    position: relative;
+    width: 220px;
+    height: 220px;
+}
+
+.tier {
+    position: absolute;
+    border-radius: 12px;
+    box-shadow: inset 0 -15px 0 rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.tier-1 {
+    width: 220px;
+    height: 70px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to right, #fbd3e9 0%, #bb377d 100%);
+}
+.tier-2 {
+    width: 170px;
+    height: 60px;
+    bottom: 70px;
+    left: 25px;
+    background: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+}
+.tier-3 {
+    width: 120px;
+    height: 50px;
+    bottom: 130px;
+    left: 50px;
+    background: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+.icing {
+    position: absolute;
+    top: 0;
+    background: #fff;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.tier-1 .icing { height: 25px; }
+.tier-2 .icing { height: 20px; }
+.tier-3 .icing { height: 18px; }
+
+.tier-1 .icing-1 { left: 10%; width: 20%; height: 35px; }
+.tier-1 .icing-2 { left: 35%; width: 15%; height: 25px; }
+.tier-1 .icing-3 { left: 55%; width: 20%; height: 40px; }
+.tier-1 .icing-4 { left: 80%; width: 15%; height: 20px; }
+
+.tier-2 .icing-1 { left: 5%; width: 25%; height: 30px; }
+.tier-2 .icing-2 { left: 35%; width: 20%; height: 20px; }
+.tier-2 .icing-3 { left: 60%; width: 25%; height: 35px; }
+.tier-2 .icing-4 { left: 90%; width: 5%; height: 15px; }
+
+.tier-3 .icing-1 { left: 15%; width: 30%; height: 25px; }
+.tier-3 .icing-2 { left: 50%; width: 20%; height: 15px; }
+.tier-3 .icing-3 { left: 75%; width: 15%; height: 28px; }
+
+.candle {
+    position: absolute;
+    width: 12px;
+    height: 45px;
+    bottom: 180px;
+    left: 104px;
+    border-radius: 6px;
+    background: repeating-linear-gradient(45deg, #fff, #fff 5px, #ff4d4d 5px, #ff4d4d 10px);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+.flame {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 30px;
+    background: radial-gradient(ellipse, #fff 0%, #ffeb3b 30%, #ff9800 70%, #ff5722 100%);
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 15px rgba(255, 152, 0, 0.8), 0 0 30px rgba(255, 87, 34, 0.6);
+    filter: blur(1px);
+    transform-origin: bottom center;
+    animation: flickerIdle 2s infinite alternate, breatheFlame 4s ease-in-out infinite alternate;
+    transition: all 0.3s ease;
+}
+
+@keyframes flickerIdle {
+    0% { transform: translateX(-50%) rotate(-2deg) scale(1); }
+    100% { transform: translateX(-50%) rotate(2deg) scale(1.05); }
+}
+
+@keyframes breatheFlame {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.2); }
+}
+
+.flame-halo {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255,215,0,0.3) 0%, rgba(255,215,0,0) 70%);
+    border-radius: 50%;
+    animation: haloPulse 2s infinite alternate;
+    z-index: 1;
+}
+
+.flame.out, .flame-halo.out {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+@keyframes flicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-3deg); }
+    100% { transform: translateX(-50%) scale(1.1) rotate(3deg); }
+}
+
+@keyframes haloPulse {
+    0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+    100% { transform: translateX(-50%) scale(1.3); opacity: 0.8; }
+}
+
+.fireflies {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+.firefly {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: #ffeaa7;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 3px #ffeaa7;
+    animation: fly 10s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fly {
+    0% { transform: translate(0, 0) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translate(calc(150px - 75px), -300px) scale(0.2); opacity: 0; }
+}
+
+/* Sprinkles (Kẹo cốm) */
+.sprinkles-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.sprinkle {
+    position: absolute;
+    width: 4px;
+    height: 12px;
+    border-radius: 2px;
+    animation: sprinkleFall 3s linear forwards;
+}
+
+@keyframes sprinkleFall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(300px) rotate(360deg); opacity: 0; }
+}
+
+/* ==========================================
+   Màn 4: Canvas & Polaroids (Zero Gravity)
+   ========================================== */
+#fireworks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#polaroid-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15; /* Nằm trên cả chữ bị minimize */
+    pointer-events: none; 
+}
+
+/* Polaroid Premium Styling */
+.polaroid {
+    position: absolute;
+    background: white;
+    padding: 10px 10px 20px 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    cursor: grab;
+    user-select: none;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 1s ease, filter 0.5s ease;
+    will-change: transform;
+    contain: layout style paint; /* Tối ưu repaint — giới hạn ảnh hưởng render trong thẻ */
+}
+
+/* Tape effect (Washi Tape Blend) */
+.polaroid::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 70px;
+    height: 25px;
+    background: rgba(220, 220, 220, 0.6); /* Băng keo mờ */
+    mix-blend-mode: multiply; /* Hòa trộn vào nền */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.polaroid-media {
+    width: 130px;
+    height: 150px;
+    object-fit: cover;
+    background: #333;
+    display: block;
+    border-radius: 1px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.4);
+    /* Vintage Filter */
+    filter: sepia(0.2) contrast(1.1) saturate(1.1);
+}
+
+/* Video Anti-Fullscreen: Ép video render inline + ẨN TOÀN BỘ native controls */
+video.polaroid-media {
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: none; /* Lớp 1: Ngăn tap trực tiếp vào video */
+}
+
+/* Lớp 2: Ẩn native controls bằng CSS pseudo-element selectors */
+video.polaroid-media::-webkit-media-controls {
+    display: none !important;
+    -webkit-appearance: none;
+}
+video.polaroid-media::-webkit-media-controls-panel {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-play-button {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-start-playback-button {
+    display: none !important;
+    -webkit-appearance: none;
+}
+video.polaroid-media::-webkit-media-controls-overlay-play-button {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-timeline {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-current-time-display {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-time-remaining-display {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-volume-slider {
+    display: none !important;
+}
+video.polaroid-media::-webkit-media-controls-enclosure {
+    display: none !important;
+}
+/* Firefox */
+video.polaroid-media::-moz-media-controls {
+    display: none !important;
+}
+
+/* Lớp 3: Touch Shield — tấm chắn vô hình đè lên video */
+/* Chặn mọi tap/touch chạm vào native controls bên dưới.
+   Click sẽ bubble lên .polaroid để trigger hover/zoom bình thường. */
+.video-touch-shield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background: transparent;
+    -webkit-tap-highlight-color: transparent;
+    cursor: grab;
+}
+
+.polaroid .glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    border-radius: 2px;
+}
+
+.polaroid-caption {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: #2c2c2c;
+    text-align: center;
+    padding-top: 15px;
+    font-weight: 700;
+}
+
+.polaroid.fading-out {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.5) !important;
+}
+
+/* ==========================================
+   Responsive (Mobile First Design)
+   ========================================== */
+@media (max-width: 480px) {
+    /* V6 Fix: Thu nhỏ quà và nút bấm */
+    .gift-box { width: 100px; height: 100px; }
+    .gift-body { width: 100px; height: 75px; }
+    .gift-lid { width: 120px; left: -10px; height: 30px; }
+    
+    .glass-btn {
+        padding: 10px 20px !important;
+        font-size: 1rem !important;
+    }
+    .action-buttons {
+        flex-wrap: wrap; /* Chống tràn bề ngang khi có nhiều nút */
+    }
+    
+    .cake { transform: scale(0.65) translateY(-20px); }
+    .wish-glass-panel { padding: 15px; width: 95%; }
+    #wish-text { font-size: 1.6rem; }
+    
+    /* Elegant minimized panel on mobile */
+    .wish-glass-panel.minimized {
+        animation: none;
+        position: fixed;
+        top: 0;
+        bottom: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%;
+        padding: 10px 15px;
+        border-radius: 15px;
+        z-index: 999;
+    }
+    .wish-glass-panel.minimized #wish-text {
+        font-size: 1.2rem;
+        display: block;
+    }
+    .wish-glass-panel.minimized .action-buttons {
+        margin-top: 10px;
+    }
+    .wish-glass-panel.minimized .glass-btn {
+        padding: 8px 15px !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .polaroid { padding: 8px 8px 16px 8px; }
+    .polaroid-media { width: 80px; height: 100px; }
+    .polaroid-caption { font-size: 1rem; padding-top: 8px; }
+    .polaroid::before { width: 40px; height: 15px; top: -8px; }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+    /* V6 Fix: Tablet Layout */
+    .gift-box { width: 120px; height: 120px; }
+    .gift-body { width: 120px; height: 90px; }
+    .gift-lid { width: 140px; left: -10px; height: 35px; }
+    
+    .glass-btn {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+    }
+    
+    .cake { transform: scale(0.8); }
+    #wish-text { font-size: 2.2rem; }
+    
+    .polaroid { padding: 10px 10px 20px 10px; }
+    .polaroid-media { width: 110px; height: 130px; }
+    .polaroid-caption { font-size: 1.2rem; padding-top: 10px; }
+    .polaroid::before { width: 50px; height: 20px; top: -10px; }
+}
+
+@media (min-width: 769px) {
+    .polaroid-media { width: 150px; height: 170px; }
+    .polaroid-caption { font-size: 1.5rem; padding-top: 12px; }
+    .polaroid { padding: 12px 12px 24px 12px; }
+    .polaroid::before { width: 60px; height: 25px; top: -12px; }
+    #wish-text { font-size: 3rem; }
+}
+
+/* ==========================================
+   V4 Cinematic Additions
+   ========================================== */
+.spotlight {
+    position: absolute;
+    top: -50vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 150vh;
+    background: radial-gradient(ellipse at top, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+    clip-path: polygon(20% 0, 80% 0, 100% 100%, 0% 100%);
+    z-index: 0;
+    pointer-events: none;
+    animation: spotlightFadeIn 3s ease forwards;
+}
+
+@keyframes spotlightFadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.dust {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    animation: dustFloat 5s infinite ease-in-out;
+}
+
+@keyframes dustFloat {
+    0% { transform: translateY(0) scale(0.5); opacity: 0; }
+    50% { opacity: 0.6; transform: translateY(-50px) scale(1.5); }
+    100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+}
+
+/* ==========================================
+   V4: Cinematic Upgrade Styles
+   ========================================== */
+
+/* Gift Light Burst — ánh sáng tỏa ra từ hộp quà khi mở */
+.gift-light-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    margin-left: -300px;
+    margin-top: -300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,180,0,0.3) 40%, rgba(255,107,107,0) 70%);
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.8s ease;
+}
+
+.gift-light-burst.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Gift Particles — hạt sáng nổ tỏa ra khi mở quà */
+#gift-particles {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.gift-particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 6px currentColor;
+    animation: giftParticleFly 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes giftParticleFly {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateY(var(--fly-y)) translateX(var(--fly-x)) scale(0.2); opacity: 0; }
+}
+
+/* Screen Flash — hiệu ứng flash trắng khi chuyển scene */
+.screen-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    opacity: 0;
+    z-index: 999;
+    pointer-events: none;
+    transition: opacity 0.6s ease-out; /* Fade-out chậm: lộ dần scene mới */
+}
+
+.screen-flash.active {
+    opacity: 0.85; /* Sáng hơn để che kín scene swap */
+    transition: opacity 0.25s ease-in; /* Flash-in nhanh */
+}
+
+/* Flame Audio Feedback — ngọn lửa lung lay mạnh khi thổi nhẹ */
+.flame.flickering-hard {
+    animation: flickerHard 0.1s infinite alternate !important;
+}
+
+@keyframes flickerHard {
+    0% {
+        transform: translateX(-50%) scale(0.5) rotate(-10deg);
+        opacity: 0.6;
+        filter: brightness(0.8);
+    }
+    100% {
+        transform: translateX(-50%) scale(0.85) rotate(10deg);
+        opacity: 1;
+        filter: brightness(1.2);
+    }
+}
+
+/* Moment of Darkness — background tối hẳn trước khi pháo hoa nổ */
+.mesh-bg.dimmed {
+    filter: brightness(0.2);
+    transition: filter 1s ease;
+}
+
+.mesh-bg.undimming {
+    filter: brightness(1);
+    transition: filter 4s ease;
+}
+
+/* ========================================= */
+/* IN-APP BROWSER OVERLAY */
+/* ========================================= */
+.in-app-browser-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #444;
+}
+
+.in-app-browser-overlay .overlay-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(255, 105, 135, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    max-width: 400px;
+    animation: floatUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.in-app-browser-overlay h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #ff6b81;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(255, 107, 129, 0.2);
+}
+
+.in-app-browser-overlay p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.in-app-browser-overlay .instruction {
+    background: #fff0f3;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: #ff4757;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.in-app-browser-overlay button {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    color: #333;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    box-shadow: 0 8px 15px rgba(255, 154, 158, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.in-app-browser-overlay button:active {
+    transform: scale(0.95);
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
